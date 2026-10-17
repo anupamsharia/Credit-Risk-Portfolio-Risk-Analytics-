@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anupam Sharia — Credit Risk &amp; Portfolio Risk Analytics</title>
+<meta name="description" content="Quantitative analytics portfolio of Anupam Sharia specializing in Credit Risk Modeling, Portfolio Risk & Volatility Forecasting, Advanced SQL, and Financial Dashboards.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-dark: #070e17;
+    --bg-card: #0d1826;
+    --bg-card-hover: #122133;
+    --line: #1d3047;
+    --line-light: #2c4463;
+    --ink: #f0ecdf;
+    --ink-muted: #8ea0b5;
+    --ink-subtle: #5f748d;
+    --gold: #d4af37;
+    --gold-glow: rgba(212, 175, 55, 0.15);
+    --green: #5fa777;
+    --red: #c1584a;
+    --blue: #5b8fc9;
+    --radius: 8px;
+    --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--bg-dark);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', -apple-system, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* Navigation Bar */
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(14px);
+    background: rgba(7, 14, 23, 0.85);
+    border-bottom: 1px solid var(--line);
+    padding: 16px 36px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .nav-brand {
+    font-family: 'Source Serif 4', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--ink);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .nav-brand span {
+    color: var(--gold);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--ink-muted);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: var(--transition);
+  }
+
+  .nav-links a:hover {
+    color: var(--ink);
+  }
+
+  .btn-nav {
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold) !important;
+    padding: 7px 16px;
+    border-radius: var(--radius);
+    font-size: 13.5px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .btn-nav:hover {
+    background: var(--gold);
+    color: var(--bg-dark) !important;
+  }
+
+  /* Container */
+  .container {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Hero Section */
+  .hero {
+    padding: 72px 0 56px;
+    border-bottom: 1px solid var(--line);
+    position: relative;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--gold-glow);
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    color: var(--gold);
+    font-size: 12.5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 22px;
+  }
+
+  .hero-tag::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    background: var(--gold);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--gold);
+  }
+
+  .hero h1 {
+    font-family: 'Source Serif 4', serif;
+    font-size: 52px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+
+  .hero .role-title {
+    font-size: 24px;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .hero .role-title span.divider {
+    color: var(--ink-subtle);
+    font-weight: 300;
+  }
+
+  .hero p.lead {
+    font-size: 17px;
+    color: var(--ink-muted);
+    max-width: 780px;
+    line-height: 1.7;
+    margin-bottom: 34px;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: #050a10;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 12px 24px;
+    border-radius: var(--radius);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 18px rgba(212, 175, 55, 0.25);
+    transition: var(--transition);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(212, 175, 55, 0.4);
+    background: #e2be49;
+  }
+
+  .btn-secondary {
+    background: var(--bg-card);
+    border: 1px solid var(--line-light);
+    color: var(--ink);
+    font-weight: 600;
+    font-size: 15px;
+    padding: 12px 22px;
+    border-radius: var(--radius);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: var(--transition);
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+    transform: translateY(-2px);
+  }
+
+  /* Metric Ribbon */
+  .metrics-ribbon {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin: 44px 0 0;
+  }
+
+  .metric-card {
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    transition: var(--transition);
+  }
+
+  .metric-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-3px);
+  }
+
+  .metric-card::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--gold);
+  }
+
+  .metric-label {
+    font-size: 12px;
+    color: var(--ink-muted);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .metric-value {
+    font-family: 'Source Serif 4', serif;
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 6px 0 4px;
+  }
+
+  .metric-note {
+    font-size: 12.5px;
+    color: var(--green);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .metric-note.risk {
+    color: var(--red);
+  }
+
+  /* Section Styling */
+  .section {
+    padding: 64px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .section-header {
+    margin-bottom: 36px;
+  }
+
+  .section-tag {
+    color: var(--gold);
+    font-size: 12.5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .section-title {
+    font-family: 'Source Serif 4', serif;
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  .section-desc {
+    color: var(--ink-muted);
+    font-size: 15.5px;
+    max-width: 680px;
+  }
+
+  /* Projects Grid */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .project-card {
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 26px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: var(--transition);
+    position: relative;
+  }
+
+  .project-card:hover {
+    border-color: var(--line-light);
+    background: var(--bg-card-hover);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+  }
+
+  .project-type {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  .project-title {
+    font-family: 'Source Serif 4', serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+
+  .project-desc {
+    color: var(--ink-muted);
+    font-size: 14px;
+    line-height: 1.65;
+    margin-bottom: 18px;
+  }
+
+  .project-highlights {
+    background: rgba(7, 14, 23, 0.6);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 14px 16px;
+    margin-bottom: 18px;
+  }
+
+  .project-highlights ul {
+    list-style: none;
+  }
+
+  .project-highlights li {
+    font-size: 13px;
+    color: #ccd5e0;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .project-highlights li:last-child {
+    margin-bottom: 0;
+  }
+
+  .project-highlights li::before {
+    content: "▸";
+    color: var(--gold);
+    font-weight: bold;
+  }
+
+  .project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 22px;
+  }
+
+  .tech-pill {
+    background: #142233;
+    color: #9cb2c9;
+    border: 1px solid #23364f;
+    font-size: 11.5px;
+    font-family: 'JetBrains Mono', monospace;
+    padding: 3px 9px;
+    border-radius: 4px;
+  }
+
+  .project-actions {
+    display: flex;
+    gap: 12px;
+    border-top: 1px solid var(--line);
+    padding-top: 18px;
+  }
+
+  .btn-card {
+    font-size: 13.5px;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--gold);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: var(--transition);
+  }
+
+  .btn-card:hover {
+    color: #f1cf5b;
+    transform: translateX(3px);
+  }
+
+  /* Live Executive Dashboard Teaser Banner */
+  .dashboard-banner {
+    background: linear-gradient(135deg, #0e1c2e 0%, #10253f 100%);
+    border: 1px solid var(--gold);
+    border-radius: var(--radius);
+    padding: 36px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
+    box-shadow: 0 10px 32px rgba(0, 0, 0, 0.4);
+    margin: 40px 0 10px;
+  }
+
+  .dash-content h3 {
+    font-family: 'Source Serif 4', serif;
+    font-size: 26px;
+    margin-bottom: 8px;
+  }
+
+  .dash-content p {
+    color: var(--ink-muted);
+    font-size: 15px;
+    max-width: 600px;
+  }
+
+  /* Skills & Methodology */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .skill-col {
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 24px;
+  }
+
+  .skill-col h4 {
+    font-family: 'Source Serif 4', serif;
+    font-size: 18px;
+    color: var(--gold);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .skill-list {
+    list-style: none;
+  }
+
+  .skill-list li {
+    font-size: 13.5px;
+    color: var(--ink-muted);
+    padding: 7px 0;
+    border-bottom: 1px solid rgba(29, 48, 71, 0.4);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .skill-list li:last-child {
+    border-bottom: none;
+  }
+
+  .skill-list li::before {
+    content: "•";
+    color: var(--gold);
+    font-size: 16px;
+  }
+
+  /* Footer */
+  footer {
+    padding: 48px 0;
+    text-align: center;
+    color: var(--ink-subtle);
+    font-size: 13.5px;
+  }
+
+  footer a {
+    color: var(--gold);
+    text-decoration: none;
+  }
+
+  footer a:hover {
+    text-decoration: underline;
+  }
+
+  .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 16px;
+  }
+
+  .social-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    color: var(--ink);
+    font-size: 13.5px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: var(--transition);
+  }
+
+  .social-link:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+    transform: translateY(-2px);
+  }
+
+  /* Responsive */
+  @media (max-width: 960px) {
+    .metrics-ribbon { grid-template-columns: repeat(2, 1fr); }
+    .projects-grid { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 40px; }
+  }
+
+  @media (max-width: 600px) {
+    .navbar { padding: 14px 20px; flex-direction: column; gap: 12px; align-items: flex-start; }
+    .nav-links { width: 100%; justify-content: space-between; }
+    .metrics-ribbon { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 34px; }
+    .hero .role-title { font-size: 18px; }
+    .dashboard-banner { padding: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<nav class="navbar">
+  <a href="index.html" class="nav-brand">
+    Anupam Sharia <span>/ Risk Analytics</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Domain &amp; Skills</a></li>
+    <li><a href="https://github.com/anupamsharia/Credit-Risk-Portfolio-Risk-Analytics-" target="_blank" rel="noopener noreferrer">GitHub Repo ↗</a></li>
+    <li><a href="dashboard/executive_dashboard.html" class="btn-nav">Executive Dashboard ↗</a></li>
+    <li><a href="https://linkedin.com/in/anupamsharia" target="_blank" rel="noopener noreferrer" class="btn-nav">LinkedIn ↗</a></li>
+  </ul>
+</nav>
+
+<div class="container">
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <div class="hero-tag">Quantitative Risk &amp; Financial Analytics Portfolio</div>
+    <h1>Anupam Sharia</h1>
+    <div class="role-title">
+      <span>Credit Risk &amp; Portfolio Risk Analytics</span>
+      <span class="divider">|</span>
+      <span>Machine Learning &amp; Quantitative Finance</span>
+    </div>
+    <p class="lead">
+      Finance-focused quantitative work spanning machine learning default risk modeling, statistical hypothesis inference, multi-asset portfolio volatility forecasting, and advanced SQL financial engineering. Every project starts with a real institutional business question, identifies risk constraints, and ends with actionable, decision-ready financial recommendations.
+    </p>
+
+    <div class="hero-cta">
+      <a href="dashboard/executive_dashboard.html" class="btn-primary">
+        ⚡ Open Executive Dashboard
+      </a>
+      <a href="https://linkedin.com/in/anupamsharia" target="_blank" rel="noopener noreferrer" class="btn-secondary">
+        Connect on LinkedIn ↗
+      </a>
+      <a href="#projects" class="btn-secondary">
+        Browse Projects ↓
+      </a>
+    </div>
+
+    <!-- Key Quantitative Metrics Ribbon -->
+    <div class="metrics-ribbon">
+      <div class="metric-card">
+        <div class="metric-label">Credit Model ROC-AUC</div>
+        <div class="metric-value">0.79</div>
+        <div class="metric-note">↑ Gradient Boosting beats score cutoff</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Underwriting Profit Lift</div>
+        <div class="metric-value">+$4.33M</div>
+        <div class="metric-note">↑ Held-out test portfolio profit swing</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Max-Sharpe 95% 1-Day VaR</div>
+        <div class="metric-value">$254K</div>
+        <div class="metric-note risk">↓ On $10M notional (35% position-capped)</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Model-Driven Net Income</div>
+        <div class="metric-value">$825K</div>
+        <div class="metric-note">↑ 474 live formula audit without error</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Interactive Dashboard Teaser -->
+  <section class="dashboard-banner">
+    <div class="dash-content">
+      <h3>Interactive Executive Dashboard</h3>
+      <p>Single-page consolidated summary with interactive Chart.js visualizations for Credit Risk ROC curves, Markowitz Efficient Frontier, VaR Stress Testing, and Financial Operations.</p>
+    </div>
+    <a href="dashboard/executive_dashboard.html" class="btn-primary">
+      Launch Live Dashboard ↗
+    </a>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="section">
+    <div class="section-header">
+      <span class="section-tag">Featured Risk Portfolios</span>
+      <h2 class="section-title">Core Quantitative Projects</h2>
+      <p class="section-desc">End-to-end analytical pipelines built with Python, PostgreSQL, and financial modeling standards.</p>
+    </div>
+
+    <div class="projects-grid">
+
+      <!-- Project 1: Credit Risk -->
+      <article class="project-card">
+        <div>
+          <div class="project-type">★ Flagship Project · Machine Learning Underwriting</div>
+          <h3 class="project-title">Credit Risk &amp; Loan Default Analytics</h3>
+          <p class="project-desc">
+            Evaluated whether machine learning scoring can replace a bank's traditional "decline if credit score ≤ 620" rule across a 10,000-loan calibrated portfolio. Developed a calibrated risk scorecard with statistical hypothesis validation and profit-maximizing probability thresholding.
+          </p>
+
+          <div class="project-highlights">
+            <ul>
+              <li><strong>Top Model:</strong> Gradient Boosting (0.79 ROC-AUC / highest PR-AUC) vs. Random Forest &amp; Logistic Regression.</li>
+              <li><strong>Statistical Testing:</strong> Welch's t-test and Chi-square confirmed significance for DTI, utilization, loan-to-income (p &lt; 0.001).</li>
+              <li><strong>Financial Impact:</strong> Shifted test portfolio outcome from -$4.19M to +$0.14M net profit (+$4.33M swing) at optimal 0.11 default threshold.</li>
+            </ul>
+          </div>
+
+          <div class="project-tech">
+            <span class="tech-pill">Python</span>
+            <span class="tech-pill">scikit-learn</span>
+            <span class="tech-pill">pandas</span>
+            <span class="tech-pill">SciPy</span>
+            <span class="tech-pill">ROC / PR Analysis</span>
+            <span class="tech-pill">Profit Curves</span>
+          </div>
+        </div>
+
+        <div class="project-actions">
+          <a href="flagship-credit-risk/Credit_Risk_Default_Analytics.ipynb" class="btn-card">View Jupyter Notebook ↗</a>
+          <a href="dashboard/executive_dashboard.html" class="btn-card">See Dashboard Tab →</a>
+        </div>
+      </article>
+
+      <!-- Project 2: Portfolio Risk -->
+      <article class="project-card">
+        <div>
+          <div class="project-type">★ Quantitative Finance · Risk &amp; Volatility Forecasting</div>
+          <h3 class="project-title">Multi-Asset Portfolio Risk &amp; Volatility Forecasting</h3>
+          <p class="project-desc">
+            Constructed a quantitative risk engine for a 5-asset allocation (US Equities, EM Equities, Bonds, Gold, Bitcoin). Conducted Markowitz mean-variance optimization, estimated historical, parametric, and Monte Carlo VaR/CVaR, and simulated crisis correlation shocks.
+          </p>
+
+          <div class="project-highlights">
+            <ul>
+              <li><strong>Instability Diagnosis:</strong> Detected textbook Markowitz estimation error (100% Bitcoin allocation); engineered a deployable 35% position-capped portfolio.</li>
+              <li><strong>Risk Quantification:</strong> 95% and 99% 1-day VaR on $10M book evaluated at $254K and $358K.</li>
+              <li><strong>Stress Testing:</strong> Under a correlation-shock crisis regime, portfolio 1-day VaR surges by ~14%.</li>
+            </ul>
+          </div>
+
+          <div class="project-tech">
+            <span class="tech-pill">Python</span>
+            <span class="tech-pill">SciPy.optimize</span>
+            <span class="tech-pill">Monte Carlo (8,000 runs)</span>
+            <span class="tech-pill">Cholesky Decomposition</span>
+            <span class="tech-pill">EWMA RiskMetrics</span>
+            <span class="tech-pill">VaR / CVaR</span>
+          </div>
+        </div>
+
+        <div class="project-actions">
+          <a href="portfolio-risk-forecasting/Portfolio_Risk_Forecasting.ipynb" class="btn-card">View Jupyter Notebook ↗</a>
+          <a href="dashboard/executive_dashboard.html" class="btn-card">See Dashboard Tab →</a>
+        </div>
+      </article>
+
+      <!-- Project 3: Advanced SQL -->
+      <article class="project-card">
+        <div>
+          <div class="project-type">★ Production SQL · Database Financial Analytics</div>
+          <h3 class="project-title">Advanced SQL for Financial Analytics</h3>
+          <p class="project-desc">
+            Architected six production query patterns across a 3-table banking schema (customers, accounts, transactions) to answer high-stakes institutional questions that simple aggregates cannot solve.
+          </p>
+
+          <div class="project-highlights">
+            <ul>
+              <li><strong>Overdraft Detection:</strong> Windowed running balances to detect intraday balance dips hidden by period-end totals.</li>
+              <li><strong>Cohort Retention:</strong> Triangular monthly cohort retention matrix based on signup lifecycle.</li>
+              <li><strong>Fraud &amp; Anomaly:</strong> Rolling z-score anomaly detection using account-level historical baselines and LATERAL join velocity filters.</li>
+              <li><strong>Segmentation:</strong> NTILE() Recency-Frequency-Monetary (RFM) tiers and median-based Customer Lifetime Value (CLV).</li>
+            </ul>
+          </div>
+
+          <div class="project-tech">
+            <span class="tech-pill">PostgreSQL 14+</span>
+            <span class="tech-pill">Window Functions</span>
+            <span class="tech-pill">LATERAL Joins</span>
+            <span class="tech-pill">CTEs</span>
+            <span class="tech-pill">PERCENTILE_CONT</span>
+            <span class="tech-pill">Cohort Analysis</span>
+          </div>
+        </div>
+
+        <div class="project-actions">
+          <a href="sql/Advanced_Financial_Analytics.sql" class="btn-card">View SQL Script ↗</a>
+        </div>
+      </article>
+
+      <!-- Project 4: Financial KPI Dashboard -->
+      <article class="project-card">
+        <div>
+          <div class="project-type">★ Financial Modeling · Corporate Performance</div>
+          <h3 class="project-title">Financial KPI &amp; Variance Dashboard (Excel)</h3>
+          <p class="project-desc">
+            Engineered a live corporate finance workbook with 4 tabs (Transactions, Assumptions, Summary, Dashboard). Built according to professional financial modeling standards with hardcoded inputs separated from formulas.
+          </p>
+
+          <div class="project-highlights">
+            <ul>
+              <li><strong>Dynamic Modeling:</strong> 420 transactions across 8 expense categories and 2 revenue streams, Jan–Sep 2025.</li>
+              <li><strong>Formula Integrity:</strong> 474 live formulas utilizing SUMIFS, INDEX, and MATCH with 0 hardcoded metrics and zero calculation errors.</li>
+              <li><strong>Executive Review:</strong> YTD Revenue $1.48M vs Expenses $656K yielding $825K net income with favorable expense variances.</li>
+            </ul>
+          </div>
+
+          <div class="project-tech">
+            <span class="tech-pill">Excel Modeling</span>
+            <span class="tech-pill">SUMIFS / INDEX-MATCH</span>
+            <span class="tech-pill">Variance Analysis</span>
+            <span class="tech-pill">Budget Calibration</span>
+            <span class="tech-pill">openpyxl</span>
+          </div>
+        </div>
+
+        <div class="project-actions">
+          <a href="excel/Financial_KPI_Dashboard.xlsx" class="btn-card">Download Excel Model (.xlsx) ↗</a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- Skills & Domain Section -->
+  <section id="skills" class="section">
+    <div class="section-header">
+      <span class="section-tag">Competencies &amp; Methodologies</span>
+      <h2 class="section-title">Core Risk &amp; Analytics Toolkit</h2>
+      <p class="section-desc">Specialized technical stack designed for credit risk analysis, quantitative risk management, and data-driven finance.</p>
+    </div>
+
+    <div class="skills-grid">
+      <div class="skill-col">
+        <h4>Credit Risk &amp; ML</h4>
+        <ul class="skill-list">
+          <li>Probability of Default (PD) Modeling</li>
+          <li>Logistic Regression, Random Forest, Gradient Boosting</li>
+          <li>ROC-AUC, PR-AUC, Confusion Matrices</li>
+          <li>Profit-Maximizing Threshold Optimization</li>
+          <li>Feature Importance &amp; Credit Scorecard Calibration</li>
+          <li>Statistical Testing (Welch's t-test, Chi-square)</li>
+        </ul>
+      </div>
+
+      <div class="skill-col">
+        <h4>Portfolio Risk &amp; Quant</h4>
+        <ul class="skill-list">
+          <li>Value-at-Risk (VaR) &amp; Expected Shortfall (CVaR)</li>
+          <li>Parametric, Historical &amp; Monte Carlo Simulation</li>
+          <li>Markowitz Mean-Variance Optimization</li>
+          <li>Efficient Frontier &amp; Max Sharpe Allocation</li>
+          <li>Cholesky Multivariate Return Simulation</li>
+          <li>Crisis Correlation Stress Testing &amp; EWMA Volatility</li>
+        </ul>
+      </div>
+
+      <div class="skill-col">
+        <h4>Data &amp; Engineering</h4>
+        <ul class="skill-list">
+          <li>Advanced SQL (PostgreSQL, Snowflake, BigQuery)</li>
+          <li>Window Functions, CTEs, LATERAL Joins</li>
+          <li>Python (pandas, NumPy, scikit-learn, SciPy)</li>
+          <li>Financial Modeling &amp; Budget Variance (Excel)</li>
+          <li>Interactive Visualizations (Chart.js, Seaborn, Matplotlib)</li>
+          <li>Exploratory Data Analysis &amp; Data Pipeline Architecture</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="social-links">
+      <a href="https://linkedin.com/in/anupamsharia" target="_blank" rel="noopener noreferrer" class="social-link">
+        💼 LinkedIn: anupamsharia
+      </a>
+      <a href="https://github.com/anupamsharia/Credit-Risk-Portfolio-Risk-Analytics-" target="_blank" rel="noopener noreferrer" class="social-link">
+        📁 GitHub Repository
+      </a>
+      <a href="dashboard/executive_dashboard.html" class="social-link">
+        ⚡ Executive Dashboard
+      </a>
+      <a href="README.md" class="social-link">
+        📖 Documentation
+      </a>
+    </div>
+    <p>
+      &copy; 2026 <strong>Anupam Sharia</strong> — Credit Risk &amp; Portfolio Risk Analytics.<br>
+      Built for institutional-grade decision intelligence and quantitative risk evaluation.
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
