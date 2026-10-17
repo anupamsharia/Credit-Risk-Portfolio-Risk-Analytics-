@@ -4,7 +4,7 @@
 
 Finance-focused analytics work spanning statistical inference, machine learning, quantitative risk modeling, advanced SQL, and spreadsheet financial modeling. Each project starts with a business question, shows where an approach needed correcting, and ends with a decision-ready recommendation rather than just a chart.
 
-**[→ Open the Executive Dashboard](dashboard/executive_dashboard.html)** *(or [Live Dashboard on GitHub Pages](https://anupamsharia.github.io/Credit-Risk-Portfolio-Risk-Analytics-/dashboard/executive_dashboard.html))* for an interactive, consolidated summary of every project result below.
+[Live Dashboard on GitHub Pages](https://anupamsharia.github.io/Credit-Risk-Portfolio-Risk-Analytics-/dashboard/executive_dashboard.html))* for an interactive, consolidated summary of every project result below.
 
 ---
 
