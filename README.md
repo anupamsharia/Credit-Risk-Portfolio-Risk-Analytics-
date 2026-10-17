@@ -11,19 +11,29 @@ Finance-focused analytics work spanning statistical inference, machine learning,
 ## Repository structure
 
 ```
+├── data/                                     ← pre-generated CSV datasets for easy testing
+│   ├── credit_risk_loans_data.csv            ← 10,000 calibrated loan records
+│   └── multi_asset_daily_returns.csv         ← 3-year multi-asset daily return series
 ├── flagship-credit-risk/
 │   ├── Credit_Risk_Default_Analytics.ipynb   ← full pipeline, executed
+│   ├── README.md                             ← project walkthrough & methodology
 │   └── outputs/                              ← exported chart PNGs
 ├── portfolio-risk-forecasting/
 │   ├── Portfolio_Risk_Forecasting.ipynb      ← full pipeline, executed
-│   └── outputs/
+│   ├── README.md                             ← project walkthrough & methodology
+│   └── outputs/                              ← exported chart PNGs
 ├── sql/
-│   └── Advanced_Financial_Analytics.sql      ← schema + 6 annotated query patterns
+│   ├── Advanced_Financial_Analytics.sql      ← schema + 6 annotated query patterns
+│   └── README.md                             ← query patterns documentation
 ├── excel/
-│   └── Financial_KPI_Dashboard.xlsx          ← 4-tab live-formula workbook
+│   ├── Financial_KPI_Dashboard.xlsx          ← 4-tab live-formula workbook
+│   └── README.md                             ← workbook audit & assumptions guide
 ├── dashboard/
-│   └── executive_dashboard.html              ← interactive summary (open in any browser)
+│   ├── executive_dashboard.html              ← interactive summary (open in any browser)
+│   └── README.md                             ← dashboard documentation
 ├── index.html                                ← portfolio homepage / landing page
+├── QUICKSTART.md                             ← beginner's step-by-step setup guide
+├── requirements.txt                          ← python dependencies
 └── README.md
 ```
 
